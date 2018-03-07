@@ -68,7 +68,7 @@ def main():
     train_model = False
     save_model = True
     load_model = not train_model
-    model_name = 'svc_model1.p'
+    model_name = './models/svc_model1.p'
 
     if train_model:
         print("Training started....")
