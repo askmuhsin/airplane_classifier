@@ -64,26 +64,39 @@ X_train, X_test, y_train, y_test = train_test_split(
                                 X, y, test_size=0.3, random_state=rand_state)
 ## --------------------------------------------
 
-# ## implement support vector classifier
-# t = time.time()
-# svc = LinearSVC()
-# svc.fit(X_train, y_train)
-# print("time take to train SVC:\t", time.time()-t)
-#
-# ## save model to disk
-# filename = 'svc_model1.p'
-# pickle.dump(svc, open(filename, 'wb'))
+train_model = False
+save_model = True
+load_model = not train_model
+model_name = 'svc_model1.p'
 
-## load model from disk (if already saved)
-with open('svc_model1.p', 'rb') as f:
-    svc = pickle.load(f)
+def main():
+    if train_model:
+        print("Training started....")
+        ## implement support vector classifier
+        t = time.time()
+        svc = LinearSVC()
+        svc.fit(X_train, y_train)
+        print("Time take to train SVC:\t", time.time()-t)
+        if save_model:
+            ## save model to disk
+            filename = 'svc_model1.p'
+            pickle.dump(svc, open(filename, 'wb'))
 
-## test Accuracy on test set
-print('Test Accuracy of SVC = ', round(svc.score(X_test, y_test), 4))
+    if load_model:
+        ## load model from disk (if already saved)
+        with open(model_name, 'rb') as f:
+            svc = pickle.load(f)
+        print("{} loaded from disk!".format(model_name))
 
-## predict performance on random test set
-n_predict = 10
-t = time.time()
-print('My SVC predicts: ', svc.predict(X_test[0:n_predict]))
-print('For these',n_predict, 'labels: ', *y_test[0:n_predict])
-print(round(time.time()-t, 5), 'Seconds to predict', n_predict,'labels with SVC')
+    ## test Accuracy on test set
+    print('Test Accuracy of SVC = ', round(svc.score(X_test, y_test), 4))
+
+    ## predict performance on random test set
+    n_predict = 10
+    t = time.time()
+    print('My SVC predicts: ', svc.predict(X_test[0:n_predict]))
+    print('For these',n_predict, 'labels: ', *y_test[0:n_predict])
+    print(round(time.time()-t, 5), 'Seconds to predict', n_predict,'labels with SVC')
+
+if __name__ == '__main__':
+    main()
