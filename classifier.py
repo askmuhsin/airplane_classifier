@@ -1,12 +1,12 @@
 import glob
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-import cv2 as cv
-import random
-import numpy as np
-from sklearn.svm import LinearSVC
 import time
 import pickle
+import random
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.svm import LinearSVC
 
 # --------------------------------------------
 
@@ -34,15 +34,15 @@ y = label
 
 assert len(X)==len(y), "mismatch in data and label size"
 
-# # Exploratory data
-# for _ in range(5):
-#     n = random.randint(0, len(X)-1)
-#     img_ = plt.imread(X[n])
-#     label_ = "plane" if y[n] else "not plane"
-#     plt.imshow(img_)
-#     plt.title(label_)
-#     plt.show()
-# --------------------------------------------
+# Exploratory data
+for _ in range(5):
+    n = random.randint(0, len(X)-1)
+    img_ = plt.imread(X[n])
+    label_ = "plane" if y[n] else "not plane"
+    plt.imshow(img_)
+    plt.title(label_)
+    plt.show()
+--------------------------------------------
 
 # convert to grayscale and flatten data
 def gryAndFlatten(images):
@@ -65,19 +65,21 @@ X_train, X_test, y_train, y_test = train_test_split(
 # --------------------------------------------
 
 ## implement support vector classifier
-
 t = time.time()
 svc = LinearSVC()
 svc.fit(X_train, y_train)
 print("time take to train SVC:\t", time.time()-t)
 
+## save model to disk
 filename = 'svc_model1.p'
 pickle.dump(svc, open(filename, 'wb'))
 
+## test Accuracy on test set
 print('Test Accuracy of SVC = ', round(svc.score(X_test, y_test), 4))
 
-n_predict = 10
-print('My SVC predicts: ', svc.predict(X_test[0:n_predict]))
-print('For these',n_predict, 'labels: ', y_test[0:n_predict])
+## predict performance on random test set
+n_predict = random.randint(0,len(X_test)-11)
+print('My SVC predicts: ', svc.predict(X_test[n_predict:n_predict-10]))
+print('For these',n_predict, 'labels: ', y_test[n_predict:n_predict-10])
 t2 = time.time()
 print(round(t2-t, 5), 'Seconds to predict', n_predict,'labels with SVC')
