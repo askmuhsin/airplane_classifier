@@ -64,13 +64,12 @@ X_train, X_test, y_train, y_test = train_test_split(
                                 X, y, test_size=0.3, random_state=rand_state)
 ## --------------------------------------------
 
-
 def main():
     train_model = False
     save_model = True
     load_model = not train_model
     model_name = 'svc_model1.p'
-    
+
     if train_model:
         print("Training started....")
         ## implement support vector classifier
