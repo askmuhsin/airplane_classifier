@@ -9,7 +9,9 @@ Instead to do the training edit the `train_model` flag to `True` in main().
 
 usage `python cnn_classifier.py`     
 A LeNet like implementation. Running the code above will commence the training.    
-![lenet](https://github.com/askmuhsin/airplane_classifier/blob/master/images/lenet_sch.png)
+![lenet](https://github.com/askmuhsin/airplane_classifier/blob/master/images/lenet_sch.png)    
+Inputs are images of size 100X100, output is 2 classes (plane or not plane).     
+
 
 ---
 
