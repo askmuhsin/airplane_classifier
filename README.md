@@ -1,18 +1,21 @@
 # Classify airplane images from satellite data
 
-usage `python classifier.py`     
+usage `python svm_classifier.py`     
 SVC model is saved as a pickle file, and running the above code without any    
 alteration of the code will skip the training and run the classifier using the saved model.   
 Instead to do the training edit the `train_model` flag to `True` in main().
 
 ---
 
-## Classification :   
-The classification is currently done using a support vector classifier.
+usage `python cnn_classifier.py`     
+A LeNet like implementation. Running the code above will commence the training.      
+
+---
 
 ## Dependencies
 * python3+
 ### following python libraries :
+* keras
 * glob
 * time
 * pickle
